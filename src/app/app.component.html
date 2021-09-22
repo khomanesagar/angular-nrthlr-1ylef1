@@ -1,26 +1,71 @@
 <!-- <app-profile-editor *ngIf="showProfileEditor"></app-profile-editor> -->
 <h1>Loan Form</h1>
 
-<form [formGroup]="profileForm">
+<form [formGroup]="profileForm" (ngSubmit)="getOTP()" method="POST">
   <label>City: </label>
-  <input
-    type="text"
-    class="form-control"
-    formControlName="firstName"
-    name="mobile"
+  <input type="text" class="form-control" formControlName="city"  [ngClass]="{ 'is-invalid': profileFormFval.city.errors && (profileFormFval.city.touched || profileFormFval.city.dirty) }"
   />
+  <div *ngIf="profileFormFval.city.errors" class="invalid-feedback mb-3">
+  <div *ngIf="profileFormFval.city.errors.required">
+    City is required
+  </div>
+  <div *ngIf="profileFormFval.city.errors.pattern">
+    Invalid City name
+  </div>
+  </div>
 
   <label>PanNumber: </label>
-  <input type="text" class="form-control" formControlName="PanNumber" name="mobile" />
+  <input type="text" class="form-control" formControlName="PanNumber" name="PanNumber" [ngClass]="{ 'is-invalid': profileFormFval.PanNumber.errors && (profileFormFval.PanNumber.touched || profileFormFval.PanNumber.dirty) }"
+  />
+  <div *ngIf="profileFormFval.PanNumber.errors" class="invalid-feedback mb-3">
+  <div *ngIf="profileFormFval.PanNumber.errors.required">
+  Pan Number is required
+  </div>
+  <div *ngIf="profileFormFval.PanNumber.errors.pattern">
+    Invalid Pan Number
+  </div>
+  </div>
 
   <label>FullName: </label>
-  <input id="city" type="text" formControlName="city" name="mobile" />
+  <input type="text" class="form-control" formControlName="fullName" name="fullName" [ngClass]="{ 'is-invalid': profileFormFval.fullName.errors && (profileFormFval.fullName.touched || profileFormFval.fullName.dirty) }"
+  />
+  <div *ngIf="profileFormFval.fullName.errors" class="invalid-feedback mb-3">
+  <div *ngIf="profileFormFval.fullName.errors.required">
+  full Name is required
+  </div>
+  <div *ngIf="profileFormFval.fullName.errors.pattern">
+    Invalid full name
+  </div>
+  </div>
 
   <label>Email: </label>
-  <input id="state" type="text" formControlName="state" name="mobile" />
+  <input type="text" class="form-control" formControlName="email" name="email" [ngClass]="{ 'is-invalid': profileFormFval.email.errors && (profileFormFval.email.touched || profileFormFval.email.dirty) }"
+  />
+  <div *ngIf="profileFormFval.email.errors" class="invalid-feedback mb-3">
+  <div *ngIf="profileFormFval.email.errors.required">
+  email is required
+  </div>
+  <div *ngIf="profileFormFval.email.errors.pattern">
+    Invalid email
+  </div>
+  </div>
 
   <label>Mobile: </label>
-  <input id="zip" type="text" formControlName="mobile" name="mobile" />
+  <input type="text" class="form-control" formControlName="mobile"  [ngClass]="{ 'is-invalid': profileFormFval.mobile.errors && (profileFormFval.mobile.touched || profileFormFval.mobile.dirty) }"
+  />
+  <div *ngIf="profileFormFval.mobile.errors" class="invalid-feedback mb-3">
+  <div *ngIf="profileFormFval.mobile.errors.required">
+  mobile no. is required
+  </div>
+  <div *ngIf="profileFormFval.mobile.errors.pattern">
+    Invalid mobile
+  </div>
+  </div>
+
+  <button type="submit">Get OTP</button>
+  <br>
+  <label>Enter OTP: </label>
+  <input type="text" class="form-control" formControlName="otpNumber" name="otpNumber" />
 
   <!-- <div formArrayName="">
   <h2></h2>
@@ -32,7 +77,7 @@
   </div>
 </div> -->
 
-  <button type="submit" class="btn btn-primary" [disabled]="!profileForm.valid">Submit</button>
+  <button  class="btn btn-primary" [disabled]="!profileForm.valid">Submit</button>
 </form>
 
 <hr />

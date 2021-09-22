@@ -1,28 +1,38 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { Validators } from '@angular/forms';
+import { FormControl } from '@angular/forms';
+import { FormGroup } from '@angular/forms';
 import { FormArray } from '@angular/forms';
 
-export type EditorType = 'name' | 'profile';
+// export type EditorType = 'name' | 'profile';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  styleUrls: ['./app.component.css'],
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   profileForm = this.fb.group({
-    firstName: ['', Validators.required],
-    lastName: [''],
-    street: [''],
-    city: [''],
-    state: [''],
-    zip: ['']
+    city: ['', [Validators.required]],
+    PanNumber: ['', [Validators.required]],
+    fullName: ['', [Validators.required]],
+    email: ['',[Validators.required,Validators.pattern('^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}$')]],
+    mobile: ['', [Validators.required]],
+    otpNumber: [''],
   });
 
+  constructor(private fb: FormBuilder) {}
 
-  constructor(private fb: FormBuilder) { }
+  ngOnInit() {}
 
+  get profileFormFval() {
+    return this.profileForm.controls;
+  }
+
+  getOTP() {
+    return true;
+  }
   // get showNameEditor() {
   //   return this.editor === 'name';
   // }
@@ -35,7 +45,6 @@ export class AppComponent {
   //   this.editor = type;
   // }
 }
-
 
 /*
 Copyright Google LLC. All Rights Reserved.
