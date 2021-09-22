@@ -1,0 +1,40 @@
+<form [formGroup]="profileForm">
+  <label for="first-name">City: </label>
+  <input id="first-name" type="text" formControlName="firstName" required>
+
+  <label for="last-name">PanNumber: </label>
+  <input id="last-name" type="text" formControlName="PanNumber">
+
+  <div formGroupName="address">
+
+
+    <label for="city">FullName: </label>
+    <input id="city" type="text" formControlName="city">
+
+    <label for="state">Email: </label>
+    <input id="state" type="text" formControlName="state">
+
+    <label for="zip">Mobile: </label>
+    <input id="zip"type="text" formControlName="zip">
+  </div>
+
+  <div formArrayName="">
+    <h2></h2>
+    <button (click)="addAlias()"></button>
+
+    <div *ngFor="let alias of aliases.controls; let i=index">
+      <!-- The repeated alias template -->
+
+      <input id="alias-{{ i }}" type="text" [formControlName]="i">
+    </div>
+  </div>
+
+
+
+  <button type="submit" [disabled]="!profileForm.valid">Submit</button>
+</form>
+
+<hr>
+
+<p>Form Value: {{ profileForm.value | json }}</p>
+<p>Form Error: {{ profileForm.errors | json }}</p>

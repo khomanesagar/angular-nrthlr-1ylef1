@@ -1,0 +1,41 @@
+<!-- <app-profile-editor *ngIf="showProfileEditor"></app-profile-editor> -->
+<h1>Loan Form</h1>
+
+<form [formGroup]="profileForm">
+  <label>City: </label>
+  <input
+    type="text"
+    class="form-control"
+    formControlName="firstName"
+    name="mobile"
+  />
+
+  <label>PanNumber: </label>
+  <input type="text" class="form-control" formControlName="PanNumber" name="mobile" />
+
+  <label>FullName: </label>
+  <input id="city" type="text" formControlName="city" name="mobile" />
+
+  <label>Email: </label>
+  <input id="state" type="text" formControlName="state" name="mobile" />
+
+  <label>Mobile: </label>
+  <input id="zip" type="text" formControlName="mobile" name="mobile" />
+
+  <!-- <div formArrayName="">
+  <h2></h2>
+  <button (click)="addAlias()"></button>
+
+  <div *ngFor="let alias of aliases.controls; let i=index">
+
+    <input id="alias-{{ i }}" type="text" [formControlName]="i">
+  </div>
+</div> -->
+
+  <button type="submit" class="btn btn-primary" [disabled]="!profileForm.valid">Submit</button>
+</form>
+
+<hr />
+
+<p>Form Value: {{ profileForm.value | json }}</p>
+<p>Form Error: {{ profileForm.errors | json }}</p>
