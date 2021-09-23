@@ -44,7 +44,7 @@ export class AppComponent implements OnInit {
 
       this.validateAllFields(this.profileForm);
 
-      let apiurl = '';
+      let apiurl = 'http://lab.thinkoverit.com/api/getOTP.php';
       let headers = new HttpHeaders({
         'Content-Type': 'text/json'
       });
