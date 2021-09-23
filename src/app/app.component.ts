@@ -4,17 +4,24 @@ import { Validators } from '@angular/forms';
 import { FormControl } from '@angular/forms';
 import { FormGroup } from '@angular/forms';
 import { FormArray } from '@angular/forms';
+import { HttpClient, HttpHeaders, HttpResponse, HttpErrorResponse } from '@angular/common/http';
+import { throwError } from 'rxjs';
+import { catchError, retry } from 'rxjs/operators';
 
 // export type EditorType = 'name' | 'profile';
 
-otpSendResponse: [];
+
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
 })
+
 export class AppComponent implements OnInit {
+
+  otpSendResponse:any;
+
   profileForm = this.fb.group({
     city: ['', [Validators.required,Validators.pattern('^[a-zA-Z0-9. _-]+$')]],
     PanNumber: ['', [Validators.required,Validators.pattern('[A-Z]{5}[0-9]{4}[A-Z]{1}')]],
@@ -24,7 +31,7 @@ export class AppComponent implements OnInit {
     otpNumber: [''],
   });
 
-  constructor(private fb: FormBuilder) {}
+  constructor(private fb: FormBuilder, private http: HttpClient) {}
 
   ngOnInit() {}
 
@@ -37,7 +44,20 @@ export class AppComponent implements OnInit {
 
       this.validateAllFields(this.profileForm);
 
-      
+      let apiurl = '';
+
+      let headers = new HttpHeaders({
+        'Content-Type': 'text/json'
+      });
+      let options = {
+        headers
+      }
+  
+      let body = JSON.stringify('test');
+      this.http.post<any>(apiurl, body, options)
+        .subscribe((res) => {
+          this.otpSendResponse = res;
+      });
 
     }else{
       this.validateAllFields(this.profileForm);
