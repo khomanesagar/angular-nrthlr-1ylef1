@@ -44,7 +44,7 @@ export class AppComponent implements OnInit {
 
       this.validateAllFields(this.profileForm);
 
-      let apiurl = 'http://lab.thinkoverit.com/api/getOTP.php';
+      let apiUrl = 'https://lab.thinkoverit.com/api/getOTP.php';
       let headers = new HttpHeaders({
         'Content-Type': 'text/json'
       });
@@ -52,8 +52,8 @@ export class AppComponent implements OnInit {
         headers
       }
       console.log(this.profileForm.value);
-      let body = this.profileForm.value;
-      this.http.post<any>(apiurl, body, options)
+      let body = { "panNumber": "AAFNZ2078H", "city": "Pune", "fullname": "Ajay Sharma", "email": "applicant@pixel6.co", "mobile": "9890150507" };
+      this.http.post<any>(apiUrl, body, options)
         .subscribe((res) => {
           console.log(res);
           this.otpSendResponse = res;
