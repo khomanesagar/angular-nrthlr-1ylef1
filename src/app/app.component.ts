@@ -7,6 +7,8 @@ import { FormArray } from '@angular/forms';
 
 // export type EditorType = 'name' | 'profile';
 
+otpSendResponse: [];
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -14,11 +16,11 @@ import { FormArray } from '@angular/forms';
 })
 export class AppComponent implements OnInit {
   profileForm = this.fb.group({
-    city: ['', [Validators.required]],
-    PanNumber: ['', [Validators.required]],
-    fullName: ['', [Validators.required]],
+    city: ['', [Validators.required,Validators.pattern('^[a-zA-Z0-9. _-]+$')]],
+    PanNumber: ['', [Validators.required,Validators.pattern('[A-Z]{5}[0-9]{4}[A-Z]{1}')]],
+    fullName: ['', [Validators.required,Validators.pattern('^[a-zA-Z0-9. _-]+$')]],
     email: ['',[Validators.required,Validators.pattern('^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}$')]],
-    mobile: ['', [Validators.required]],
+    mobile: ['', [Validators.required,Validators.pattern('[6-9]\\d{9}')]],
     otpNumber: [''],
   });
 
@@ -31,8 +33,27 @@ export class AppComponent implements OnInit {
   }
 
   getOTP() {
-    return true;
+    if(this.profileForm.valid){
+
+      this.validateAllFields(this.profileForm);
+
+      
+
+    }else{
+      this.validateAllFields(this.profileForm);
+    }
   }
+
+  validateAllFields(formGroup: FormGroup) {         
+    Object.keys(formGroup.controls).forEach(field => {  
+        const control = formGroup.get(field);            
+        if (control instanceof FormControl) {             
+            control.markAsTouched({ onlySelf: true });
+        } else if (control instanceof FormGroup) {        
+            this.validateAllFields(control);  
+        }
+    });
+}
   // get showNameEditor() {
   //   return this.editor === 'name';
   // }
