@@ -26,14 +26,14 @@
   </div>
   </div>
 
-  <label>FullName: </label>
-  <input type="text" class="form-control" formControlName="fullName" name="fullName" [ngClass]="{ 'is-invalid': profileFormFval.fullName.errors && (profileFormFval.fullName.touched || profileFormFval.fullName.dirty) }"
+  <label>full name: </label>
+  <input type="text" class="form-control" formControlName="fullname" name="fullname" [ngClass]="{ 'is-invalid': profileFormFval.fullname.errors && (profileFormFval.fullname.touched || profileFormFval.fullname.dirty) }"
   />
-  <div *ngIf="profileFormFval.fullName.errors" class="invalid-feedback mb-3">
-  <div *ngIf="profileFormFval.fullName.errors.required">
+  <div *ngIf="profileFormFval.fullname.errors" class="invalid-feedback mb-3">
+  <div *ngIf="profileFormFval.fullname.errors.required">
   full Name is required
   </div>
-  <div *ngIf="profileFormFval.fullName.errors.pattern">
+  <div *ngIf="profileFormFval.fullname.errors.pattern">
     Invalid full name
   </div>
   </div>

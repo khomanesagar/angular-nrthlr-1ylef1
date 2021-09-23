@@ -25,7 +25,7 @@ export class AppComponent implements OnInit {
   profileForm = this.fb.group({
     city: ['', [Validators.required,Validators.pattern('^[a-zA-Z0-9. _-]+$')]],
     PanNumber: ['', [Validators.required,Validators.pattern('[A-Z]{5}[0-9]{4}[A-Z]{1}')]],
-    fullName: ['', [Validators.required,Validators.pattern('^[a-zA-Z0-9. _-]+$')]],
+    fullname: ['', [Validators.required,Validators.pattern('^[a-zA-Z0-9. _-]+$')]],
     email: ['',[Validators.required,Validators.pattern('^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}$')]],
     mobile: ['', [Validators.required,Validators.pattern('[6-9]\\d{9}')]],
     otpNumber: [''],
@@ -45,17 +45,17 @@ export class AppComponent implements OnInit {
       this.validateAllFields(this.profileForm);
 
       let apiurl = '';
-
       let headers = new HttpHeaders({
         'Content-Type': 'text/json'
       });
       let options = {
         headers
       }
-  
-      let body = JSON.stringify('test');
+      console.log(this.profileForm.value);
+      let body = this.profileForm.value;
       this.http.post<any>(apiurl, body, options)
         .subscribe((res) => {
+          console.log(res);
           this.otpSendResponse = res;
       });
 
